@@ -394,7 +394,7 @@
     <div class="section-head reveal">
       <div class="section-tag">Proyectos</div>
       <h2>Trabajo reciente</h2>
-      <p>Cada tarjeta incluye espacio para tu captura de pantalla o video. Reemplaza la imagen/placeholder por tu material y actualiza el texto con los detalles reales del proyecto.</p>
+      <p>Cada tarjeta contiene un proyecto con su descripción, herramientas utilizadas y resultados obtenidos.</p>
     </div>
     <div class="projects-grid">
 
@@ -415,39 +415,27 @@
         </div>
       </div>
 
-      <!-- PROYECTO 2 -->
-      <div class="project-card reveal tilt" style="transition-delay:.08s"
-           data-video=""
-           data-problema="Describe aquí el proceso manual y lento que existía antes."
-           data-solucion="Describe aquí qué automatizaste con Apps Script y cómo funciona."
-           data-resultado="Describe aquí el impacto medible en tiempo o costos.">
-        <div class="media-slot">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="hint">Coloca aquí tu imagen de portada<br>(ej: /assets/proyecto2.jpg) y tu video</div>
+      <!-- PROYECTO 3 (próximamente) -->
+      <div class="project-card reveal" style="transition-delay:.08s">
+        <div class="media-slot" style="animation:none;">
+          <div class="hint" style="font-size:.85rem;font-weight:600;color:var(--text-dim);">Próximamente se agregará aquí la imagen y la descripción de este proyecto</div>
         </div>
         <div class="project-body">
-          <div class="project-tags"><span class="tag">Apps Script</span><span class="tag">Automatización</span></div>
-          <h3>Nombre del proyecto</h3>
-          <p>Describe brevemente el proceso que automatizaste, las herramientas usadas y el impacto medible en tiempo o costos.</p>
-          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
+          <div class="project-tags"><span class="tag">Automatización</span></div>
+          <h3>Nuevo proyecto en camino</h3>
+          <p>Estoy documentando este proyecto. Muy pronto encontrarás aquí el detalle completo.</p>
         </div>
       </div>
 
-      <!-- PROYECTO 3 -->
-      <div class="project-card reveal tilt" style="transition-delay:.16s"
-           data-video=""
-           data-problema="Describe aquí qué patrones o información era difícil de detectar manualmente."
-           data-solucion="Describe aquí el modelo o solución de IA implementada."
-           data-resultado="Describe aquí cómo esto mejora la toma de decisiones.">
-        <div class="media-slot">
-          <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="hint">Coloca aquí tu imagen de portada<br>(ej: /assets/proyecto3.jpg) y tu video</div>
+      <!-- PROYECTO 4 (próximamente) -->
+      <div class="project-card reveal" style="transition-delay:.16s">
+        <div class="media-slot" style="animation:none;">
+          <div class="hint" style="font-size:.85rem;font-weight:600;color:var(--text-dim);">Próximamente se agregará aquí la imagen y la descripción de este proyecto</div>
         </div>
         <div class="project-body">
-          <div class="project-tags"><span class="tag">Inteligencia Artificial</span><span class="tag">Datos</span></div>
-          <h3>Nombre del proyecto</h3>
-          <p>Describe el modelo o solución de IA implementada, qué patrones detecta y cómo apoya la toma de decisiones.</p>
-          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
+          <div class="project-tags"><span class="tag">Inteligencia Artificial</span></div>
+          <h3>Nuevo proyecto en camino</h3>
+          <p>Estoy documentando este proyecto. Muy pronto encontrarás aquí el detalle completo.</p>
         </div>
       </div>
 
@@ -624,7 +612,7 @@
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('.project-card').forEach(card => {
+  document.querySelectorAll('.project-card[data-problema]').forEach(card => {
     card.querySelector('.media-slot').addEventListener('click', () => openProjectModal(card));
     const link = card.querySelector('.project-link');
     if (link){
