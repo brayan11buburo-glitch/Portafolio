@@ -172,7 +172,8 @@
   .skill-card .name{font-weight:600;font-size:.82rem;white-space:nowrap;}
   .skill-card .desc{display:none;}
 
-  /* PROJECTS */
+  /* PROJECTS (desktop only, see responsive rules) */
+  .mobile-only{display:none;}
   .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;}
   .project-card{
     background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:18px;
@@ -228,6 +229,9 @@
   @media (max-width:768px){
     .nav-links{display:none;}
     .hamburger{display:flex;}
+    #projects{display:none;}
+    .desktop-only{display:none;}
+    .mobile-only{display:inline-block;}
   }
   @media (max-width:640px){
     .container{padding:0 18px;}
@@ -249,7 +253,6 @@
     .skill-card{padding:8px 12px;}
     .skill-card .icon{font-size:1rem;}
     .skill-card .name{font-size:.74rem;}
-    .projects-grid{grid-template-columns:1fr;gap:20px;}
     .contact-box{padding:36px 22px;}
     .contact-box h2{font-size:1.55rem;}
     .contact-actions{flex-direction:column;}
@@ -287,7 +290,6 @@
 <div class="mobile-panel" id="mobilePanel">
   <a href="#about">Sobre mí</a>
   <a href="#skills">Habilidades</a>
-  <a href="#projects">Proyectos</a>
   <a href="#contact">Contacto</a>
 </div>
 
@@ -298,7 +300,8 @@
     <h1>Transformo datos y procesos en <span class="grad">soluciones empresariales</span> que ahorran tiempo</h1>
     <p>Creo aplicaciones y herramientas que ayudan a las empresas a automatizar tareas, analizar información y tomar mejores decisiones mediante KPIs claros y procesos más eficientes. Trabajo con Inteligencia Artificial, Excel, Power BI, Looker Studio, Google Sheets, AppSheet y Google Apps Script.</p>
     <div class="hero-actions">
-      <a href="#projects" class="btn btn-primary">Ver proyectos</a>
+      <a href="#projects" class="btn btn-primary desktop-only">Ver proyectos</a>
+      <a href="#contact" class="btn btn-primary mobile-only">Contáctame</a>
       <a href="https://github.com/brayan11buburo-glitch/Portafolio" class="btn btn-outline" target="_blank" rel="noopener">Ver en GitHub</a>
     </div>
     <div class="scroll-cue"><span>Desliza para explorar</span><span class="chev"></span></div>
@@ -342,7 +345,7 @@
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="desktop-only-section">
   <div class="container">
     <div class="section-head reveal">
       <div class="section-tag">Proyectos</div>
@@ -414,11 +417,9 @@
 <section id="contact" style="border-bottom:none;">
   <div class="container">
     <div class="contact-box reveal">
-      <h2>¿Trabajamos juntos?</h2>
-      <p>Disponible para proyectos de automatización, análisis de datos y soluciones con inteligencia artificial.</p>
+      <h2>Contacto</h2>
       <div class="contact-actions">
         <a href="mailto:brayan11buburo@gmail.com" class="btn btn-primary">brayan11buburo@gmail.com</a>
-        <a href="https://github.com/brayan11buburo-glitch" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </div>
