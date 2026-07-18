@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brayan Buburo | Portafolio de Automatización, Datos e IA</title>
+<style>
+  :root{
+    --navy:#0b1220;
+    --navy-2:#111a2e;
+    --panel:#141f38;
+    --accent:#3b82f6;
+    --accent-2:#22d3ee;
+    --text:#e6ebf5;
+    --text-dim:#9aa7bd;
+    --border:#22304d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif;
+    background:var(--navy);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(11,18,32,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+  .logo{font-weight:700;font-size:1.15rem;letter-spacing:.5px;}
+  .logo span{color:var(--accent-2);}
+  .nav-links{display:flex;gap:32px;font-size:.92rem;color:var(--text-dim);}
+  .nav-links a:hover{color:var(--text);}
+  .btn{
+    display:inline-block;padding:10px 22px;border-radius:6px;
+    font-size:.9rem;font-weight:600;transition:all .2s;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04101f;}
+  .btn-primary:hover{opacity:.88;}
+  .btn-outline{border:1px solid var(--border);color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent);}
+
+  /* HERO */
+  .hero{
+    padding:110px 0 90px;
+    background:radial-gradient(ellipse at top right, rgba(59,130,246,.15), transparent 60%),
+               radial-gradient(ellipse at bottom left, rgba(34,211,238,.08), transparent 55%);
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    color:var(--accent-2);font-size:.8rem;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:16px;
+  }
+  .hero h1{font-size:2.8rem;font-weight:800;line-height:1.15;margin-bottom:18px;max-width:820px;}
+  .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero p{color:var(--text-dim);font-size:1.08rem;max-width:640px;margin-bottom:34px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* SECTION */
+  section{padding:80px 0;border-bottom:1px solid var(--border);}
+  .section-head{margin-bottom:48px;}
+  .section-tag{color:var(--accent-2);font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+  .section-head h2{font-size:2rem;font-weight:800;}
+  .section-head p{color:var(--text-dim);margin-top:12px;max-width:640px;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start;}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;font-size:1.02rem;}
+  .stat-box{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:14px;}
+  .stat-box h3{font-size:1.8rem;color:var(--accent-2);margin-bottom:4px;}
+  .stat-box span{color:var(--text-dim);font-size:.85rem;}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;}
+  .skill-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:10px;
+    padding:22px 18px;text-align:center;transition:transform .2s,border-color .2s;
+  }
+  .skill-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+  .skill-card .icon{font-size:1.7rem;margin-bottom:10px;}
+  .skill-card .name{font-weight:700;font-size:.92rem;}
+  .skill-card .desc{color:var(--text-dim);font-size:.78rem;margin-top:4px;}
+
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;}
+  .project-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;
+  }
+  .project-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.35);}
+  .media-slot{
+    aspect-ratio:16/10;background:
+      linear-gradient(135deg, rgba(59,130,246,.18), rgba(34,211,238,.10));
+    border-bottom:1px solid var(--border);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:8px;color:var(--text-dim);position:relative;
+  }
+  .media-slot svg{width:34px;height:34px;opacity:.7;}
+  .media-slot .hint{font-size:.72rem;text-align:center;padding:0 24px;line-height:1.4;}
+  .project-body{padding:22px;flex:1;display:flex;flex-direction:column;}
+  .project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+  .tag{
+    font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    background:rgba(59,130,246,.14);color:var(--accent-2);padding:4px 10px;border-radius:20px;
+  }
+  .project-body h3{font-size:1.15rem;margin-bottom:8px;}
+  .project-body p{color:var(--text-dim);font-size:.9rem;flex:1;margin-bottom:16px;}
+  .project-link{font-size:.85rem;font-weight:700;color:var(--accent-2);}
+  .project-link:hover{color:var(--accent);}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--panel);border:1px solid var(--border);border-radius:16px;
+    padding:56px;text-align:center;
+  }
+  .contact-box h2{font-size:1.9rem;margin-bottom:14px;}
+  .contact-box p{color:var(--text-dim);margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto;}
+  .contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  footer{padding:32px 0;text-align:center;color:var(--text-dim);font-size:.85rem;}
+  footer a{color:var(--accent-2);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">BRAYAN<span>.</span>BUBURO</div>
+      <div class="nav-links">
+        <a href="#about">Sobre mí</a>
+        <a href="#skills">Habilidades</a>
+        <a href="#projects">Proyectos</a>
+        <a href="#contact">Contacto</a>
+      </div>
+      <a href="#contact" class="btn btn-primary">Contáctame</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Automatización · Datos · Inteligencia Artificial</div>
+    <h1>Transformo datos y procesos en <span>soluciones empresariales</span> que ahorran tiempo</h1>
+    <p>Creo aplicaciones y herramientas que ayudan a las empresas a automatizar tareas, analizar información y tomar mejores decisiones mediante KPIs claros y procesos más eficientes. Trabajo con Inteligencia Artificial, Excel, Power BI, Looker Studio, Google Sheets, AppSheet y Google Apps Script.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">Ver proyectos</a>
+      <a href="https://github.com/brayan11buburo-glitch/Portafolio" class="btn btn-outline">Ver en GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container about-grid">
+    <div>
+      <div class="section-tag">Sobre mí</div>
+      <h2 style="font-size:2rem;font-weight:800;margin-bottom:20px;">Especialista en automatización y análisis de datos</h2>
+      <p>Diseño e implemento soluciones que permiten a las empresas convertir datos dispersos en información útil: dashboards claros, procesos automatizados y modelos apoyados en inteligencia artificial que detectan patrones y aceleran la toma de decisiones.</p>
+      <p>Cada proyecto en este portafolio incluye evidencia visual (capturas y video) del problema resuelto, la solución implementada y el impacto generado.</p>
+    </div>
+    <div>
+      <div class="stat-box"><h3>IA + BI</h3><span>Automatización inteligente de procesos</span></div>
+      <div class="stat-box"><h3>KPIs</h3><span>Dashboards para decisiones basadas en datos</span></div>
+      <div class="stat-box"><h3>End-to-End</h3><span>Desde la captura del dato hasta el reporte final</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">Stack</div>
+      <h2>Herramientas y tecnologías</h2>
+      <p>Las herramientas que uso para automatizar, analizar y comunicar datos de forma efectiva.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="icon">🤖</div><div class="name">Inteligencia Artificial</div><div class="desc">Automatización inteligente</div></div>
+      <div class="skill-card"><div class="icon">📊</div><div class="name">Power BI</div><div class="desc">Dashboards y KPIs</div></div>
+      <div class="skill-card"><div class="icon">📈</div><div class="name">Looker Studio</div><div class="desc">Reportes visuales</div></div>
+      <div class="skill-card"><div class="icon">📑</div><div class="name">Excel</div><div class="desc">Modelos y análisis</div></div>
+      <div class="skill-card"><div class="icon">🧾</div><div class="name">Google Sheets</div><div class="desc">Hojas de cálculo colaborativas</div></div>
+      <div class="skill-card"><div class="icon">📱</div><div class="name">AppSheet</div><div class="desc">Apps sin código</div></div>
+      <div class="skill-card"><div class="icon">⚙️</div><div class="name">Apps Script</div><div class="desc">Automatización a medida</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-tag">Proyectos</div>
+      <h2>Trabajo reciente</h2>
+      <p>Cada tarjeta incluye espacio para tu captura de pantalla o video. Reemplaza la imagen/placeholder por tu material y actualiza el texto con los detalles reales del proyecto.</p>
+    </div>
+    <div class="projects-grid">
+
+      <!-- PROYECTO 1 -->
+      <div class="project-card">
+        <div class="media-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
+          <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto1.png)</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Power BI</span><span class="tag">KPIs</span></div>
+          <h3>Nombre del proyecto</h3>
+          <p>Describe brevemente el problema, la solución que implementaste y el resultado (ej: "Redujo el tiempo de reporte de 3 días a 10 minutos").</p>
+          <a href="#" class="project-link">Ver detalle →</a>
+        </div>
+      </div>
+
+      <!-- PROYECTO 2 -->
+      <div class="project-card">
+        <div class="media-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
+          <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto2.mp4)</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Apps Script</span><span class="tag">Automatización</span></div>
+          <h3>Nombre del proyecto</h3>
+          <p>Describe brevemente el proceso que automatizaste, las herramientas usadas y el impacto medible en tiempo o costos.</p>
+          <a href="#" class="project-link">Ver detalle →</a>
+        </div>
+      </div>
+
+      <!-- PROYECTO 3 -->
+      <div class="project-card">
+        <div class="media-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
+          <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto3.png)</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">Inteligencia Artificial</span><span class="tag">Datos</span></div>
+          <h3>Nombre del proyecto</h3>
+          <p>Describe el modelo o solución de IA implementada, qué patrones detecta y cómo apoya la toma de decisiones.</p>
+          <a href="#" class="project-link">Ver detalle →</a>
+        </div>
+      </div>
+
+      <!-- PROYECTO 4 -->
+      <div class="project-card">
+        <div class="media-slot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
+          <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto4.png)</div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">AppSheet</span><span class="tag">Google Sheets</span></div>
+          <h3>Nombre del proyecto</h3>
+          <p>Describe la app sin código que construiste, a quién ayuda y qué operación reemplazó o mejoró.</p>
+          <a href="#" class="project-link">Ver detalle →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="container">
+    <div class="contact-box">
+      <h2>¿Trabajamos juntos?</h2>
+      <p>Disponible para proyectos de automatización, análisis de datos y soluciones con inteligencia artificial.</p>
+      <div class="contact-actions">
+        <a href="mailto:brayan11buburo@gmail.com" class="btn btn-primary">brayan11buburo@gmail.com</a>
+        <a href="https://github.com/brayan11buburo-glitch" class="btn btn-outline">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Brayan Buburo — Portafolio construido con GitHub Pages
+  </div>
+</footer>
+
+</body>
+</html>
