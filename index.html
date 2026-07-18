@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brayan Buburo | Portafolio de Automatización, Datos e IA</title>
+<title>Brayan Aponte | Portafolio de Automatización, Datos e IA</title>
 <style>
   :root{
-    --navy:#0b1220;
-    --navy-2:#111a2e;
-    --panel:#141f38;
+    --navy:#070b16;
+    --panel:rgba(22,31,54,0.55);
+    --panel-solid:#131c33;
     --accent:#3b82f6;
     --accent-2:#22d3ee;
-    --text:#e6ebf5;
-    --text-dim:#9aa7bd;
-    --border:#22304d;
+    --accent-3:#a855f7;
+    --text:#eef1f8;
+    --text-dim:#98a3ba;
+    --border:rgba(255,255,255,0.09);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -22,90 +23,174 @@
     background:var(--navy);
     color:var(--text);
     line-height:1.6;
+    overflow-x:hidden;
+    position:relative;
   }
   a{color:inherit;text-decoration:none;}
-  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  /* ANIMATED BACKGROUND ORBS */
+  .orb{
+    position:fixed;border-radius:50%;filter:blur(90px);z-index:0;opacity:.35;pointer-events:none;
+  }
+  .orb-1{width:480px;height:480px;background:var(--accent);top:-160px;left:-120px;animation:float1 22s ease-in-out infinite;}
+  .orb-2{width:420px;height:420px;background:var(--accent-3);top:30%;right:-160px;animation:float2 26s ease-in-out infinite;}
+  .orb-3{width:380px;height:380px;background:var(--accent-2);bottom:-160px;left:20%;animation:float3 20s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(80px,60px) scale(1.15);}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-70px,50px) scale(1.1);}}
+  @keyframes float3{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(50px,-60px) scale(1.2);}}
 
   /* NAV */
   header{
-    position:sticky;top:0;z-index:100;
-    background:rgba(11,18,32,0.9);
-    backdrop-filter:blur(10px);
+    position:sticky;top:0;z-index:200;
+    background:rgba(7,11,22,0.72);
+    backdrop-filter:blur(14px);
     border-bottom:1px solid var(--border);
   }
-  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
-  .logo{font-weight:700;font-size:1.15rem;letter-spacing:.5px;}
-  .logo span{color:var(--accent-2);}
-  .nav-links{display:flex;gap:32px;font-size:.92rem;color:var(--text-dim);}
-  .nav-links a:hover{color:var(--text);}
-  .btn{
-    display:inline-block;padding:10px 22px;border-radius:6px;
-    font-size:.9rem;font-weight:600;transition:all .2s;
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .logo{font-weight:800;font-size:1.15rem;letter-spacing:.5px;}
+  .logo span{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .nav-links{display:flex;gap:8px;font-size:.9rem;color:var(--text-dim);align-items:center;}
+  .nav-links a{position:relative;padding:8px 14px;border-radius:8px;transition:color .25s;}
+  .nav-links a::after{
+    content:'';position:absolute;left:14px;right:14px;bottom:5px;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transform:scaleX(0);transform-origin:left;transition:transform .3s ease;
   }
-  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04101f;}
-  .btn-primary:hover{opacity:.88;}
-  .btn-outline{border:1px solid var(--border);color:var(--text);}
-  .btn-outline:hover{border-color:var(--accent);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+  .nav-links a.active{color:var(--text);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .btn{
+    display:inline-block;padding:11px 24px;border-radius:8px;
+    font-size:.9rem;font-weight:600;transition:all .25s cubic-bezier(.2,.8,.2,1);
+    position:relative;overflow:hidden;cursor:pointer;border:none;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-3));color:#fff;box-shadow:0 6px 20px rgba(59,130,246,.28);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(59,130,246,.42);}
+  .btn-outline{border:1px solid var(--border);color:var(--text);background:rgba(255,255,255,.03);}
+  .btn-outline:hover{border-color:var(--accent);transform:translateY(-2px);background:rgba(59,130,246,.08);}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:210;}
+  .hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-panel{
+    position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;height:100vh;
+    background:rgba(10,15,28,0.98);backdrop-filter:blur(16px);
+    border-left:1px solid var(--border);
+    display:flex;flex-direction:column;gap:6px;padding:90px 28px 28px;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:190;
+  }
+  .mobile-panel.open{transform:translateX(0);}
+  .mobile-panel a{padding:14px 4px;font-size:1.05rem;color:var(--text-dim);border-bottom:1px solid var(--border);}
+  .mobile-panel a:hover{color:var(--text);}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:180;}
+  .overlay.open{opacity:1;pointer-events:auto;}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.visible{opacity:1;transform:none;}
 
   /* HERO */
-  .hero{
-    padding:110px 0 90px;
-    background:radial-gradient(ellipse at top right, rgba(59,130,246,.15), transparent 60%),
-               radial-gradient(ellipse at bottom left, rgba(34,211,238,.08), transparent 55%);
-    border-bottom:1px solid var(--border);
+  .hero{padding:120px 0 100px;border-bottom:1px solid var(--border);position:relative;}
+  .hero-spotlight{
+    position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(500px circle at var(--mx,50%) var(--my,20%), rgba(59,130,246,.14), transparent 60%);
   }
   .eyebrow{
-    color:var(--accent-2);font-size:.8rem;font-weight:700;letter-spacing:2px;
-    text-transform:uppercase;margin-bottom:16px;
+    display:inline-block;color:var(--accent-2);font-size:.78rem;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:18px;padding:6px 14px;border:1px solid rgba(34,211,238,.3);
+    border-radius:30px;background:rgba(34,211,238,.06);
+    opacity:0;animation:fadeUp .7s ease forwards;
   }
-  .hero h1{font-size:2.8rem;font-weight:800;line-height:1.15;margin-bottom:18px;max-width:820px;}
-  .hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    -webkit-background-clip:text;background-clip:text;color:transparent;}
-  .hero p{color:var(--text-dim);font-size:1.08rem;max-width:640px;margin-bottom:34px;}
-  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .hero h1{font-size:3rem;font-weight:800;line-height:1.15;margin-bottom:20px;max-width:820px;
+    opacity:0;animation:fadeUp .7s ease forwards;animation-delay:.12s;}
+  .hero h1 .grad{
+    background:linear-gradient(90deg,var(--accent),var(--accent-3),var(--accent-2),var(--accent));
+    background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes shimmer{to{background-position:300% center;}}
+  .hero p{color:var(--text-dim);font-size:1.1rem;max-width:640px;margin-bottom:36px;
+    opacity:0;animation:fadeUp .7s ease forwards;animation-delay:.24s;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .7s ease forwards;animation-delay:.36s;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .scroll-cue{margin-top:64px;display:flex;align-items:center;gap:10px;color:var(--text-dim);font-size:.8rem;
+    opacity:0;animation:fadeUp .7s ease forwards;animation-delay:.5s;}
+  .scroll-cue .chev{width:18px;height:18px;border-right:2px solid var(--accent-2);border-bottom:2px solid var(--accent-2);
+    transform:rotate(45deg);animation:bounce 1.6s ease-in-out infinite;}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0);}50%{transform:rotate(45deg) translate(4px,4px);}}
 
   /* SECTION */
-  section{padding:80px 0;border-bottom:1px solid var(--border);}
-  .section-head{margin-bottom:48px;}
+  section{padding:96px 0;border-bottom:1px solid var(--border);position:relative;}
+  .section-head{margin-bottom:52px;}
   .section-tag{color:var(--accent-2);font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
-  .section-head h2{font-size:2rem;font-weight:800;}
+  .section-head h2{font-size:2.1rem;font-weight:800;}
   .section-head p{color:var(--text-dim);margin-top:12px;max-width:640px;}
 
   /* ABOUT */
   .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start;}
   .about-grid p{color:var(--text-dim);margin-bottom:16px;font-size:1.02rem;}
-  .stat-box{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:14px;}
-  .stat-box h3{font-size:1.8rem;color:var(--accent-2);margin-bottom:4px;}
+  .stat-box{
+    background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:14px;
+    padding:22px;margin-bottom:14px;display:flex;align-items:center;gap:16px;
+    transition:transform .3s,border-color .3s;
+  }
+  .stat-box:hover{transform:translateX(-6px);border-color:var(--accent);}
+  .stat-icon{
+    width:44px;height:44px;border-radius:12px;flex-shrink:0;
+    background:linear-gradient(135deg,var(--accent),var(--accent-3));
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  }
+  .stat-box h3{font-size:1.1rem;margin-bottom:2px;}
   .stat-box span{color:var(--text-dim);font-size:.85rem;}
 
   /* SKILLS */
   .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;}
   .skill-card{
-    background:var(--panel);border:1px solid var(--border);border-radius:10px;
-    padding:22px 18px;text-align:center;transition:transform .2s,border-color .2s;
+    background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:14px;
+    padding:26px 18px;text-align:center;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;
+    position:relative;overflow:hidden;
   }
-  .skill-card:hover{transform:translateY(-4px);border-color:var(--accent);}
-  .skill-card .icon{font-size:1.7rem;margin-bottom:10px;}
+  .skill-card::before{
+    content:'';position:absolute;inset:0;border-radius:14px;padding:1px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-3),var(--accent-2));
+    opacity:0;transition:opacity .3s;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+  }
+  .skill-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 16px 32px rgba(59,130,246,.18);}
+  .skill-card:hover::before{opacity:1;}
+  .skill-card .icon{font-size:1.9rem;margin-bottom:12px;display:inline-block;transition:transform .35s;}
+  .skill-card:hover .icon{transform:scale(1.25) rotate(-6deg);}
   .skill-card .name{font-weight:700;font-size:.92rem;}
   .skill-card .desc{color:var(--text-dim);font-size:.78rem;margin-top:4px;}
 
   /* PROJECTS */
   .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;}
   .project-card{
-    background:var(--panel);border:1px solid var(--border);border-radius:14px;
-    overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;
+    background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:18px;
+    overflow:hidden;transition:box-shadow .35s,border-color .35s;display:flex;flex-direction:column;
+    transform-style:preserve-3d;will-change:transform;
   }
-  .project-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.35);}
+  .project-card:hover{box-shadow:0 24px 48px rgba(0,0,0,.4);border-color:rgba(59,130,246,.4);}
   .media-slot{
     aspect-ratio:16/10;background:
-      linear-gradient(135deg, rgba(59,130,246,.18), rgba(34,211,238,.10));
+      linear-gradient(135deg, rgba(59,130,246,.22), rgba(168,85,247,.14), rgba(34,211,238,.12));
+    background-size:200% 200%;animation:gradientShift 8s ease infinite;
     border-bottom:1px solid var(--border);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:8px;color:var(--text-dim);position:relative;
   }
-  .media-slot svg{width:34px;height:34px;opacity:.7;}
+  @keyframes gradientShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  .media-slot svg{width:34px;height:34px;opacity:.75;transition:transform .3s;}
+  .project-card:hover .media-slot svg{transform:scale(1.15);}
   .media-slot .hint{font-size:.72rem;text-align:center;padding:0 24px;line-height:1.4;}
-  .project-body{padding:22px;flex:1;display:flex;flex-direction:column;}
+  .project-body{padding:24px;flex:1;display:flex;flex-direction:column;}
   .project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
   .tag{
     font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
@@ -113,89 +198,147 @@
   }
   .project-body h3{font-size:1.15rem;margin-bottom:8px;}
   .project-body p{color:var(--text-dim);font-size:.9rem;flex:1;margin-bottom:16px;}
-  .project-link{font-size:.85rem;font-weight:700;color:var(--accent-2);}
-  .project-link:hover{color:var(--accent);}
+  .project-link{font-size:.85rem;font-weight:700;color:var(--accent-2);display:inline-flex;align-items:center;gap:6px;}
+  .project-link .arrow{transition:transform .25s;}
+  .project-link:hover .arrow{transform:translateX(5px);}
 
   /* CONTACT */
   .contact-box{
-    background:var(--panel);border:1px solid var(--border);border-radius:16px;
-    padding:56px;text-align:center;
+    background:var(--panel);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:20px;
+    padding:60px;text-align:center;position:relative;overflow:hidden;
   }
-  .contact-box h2{font-size:1.9rem;margin-bottom:14px;}
+  .contact-box::before{
+    content:'';position:absolute;width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle,rgba(59,130,246,.25),transparent 70%);
+    top:-100px;left:-100px;
+  }
+  .contact-box h2{font-size:2rem;margin-bottom:14px;}
   .contact-box p{color:var(--text-dim);margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto;}
   .contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 
   footer{padding:32px 0;text-align:center;color:var(--text-dim);font-size:.85rem;}
   footer a{color:var(--accent-2);}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .about-grid{grid-template-columns:1fr;gap:32px;}
+  }
+  @media (max-width:768px){
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+  }
+  @media (max-width:640px){
+    .container{padding:0 18px;}
+    nav{padding:14px 0;}
+    .logo{font-size:1rem;}
+    .btn{padding:9px 16px;font-size:.85rem;}
+    .hero{padding:64px 0 56px;}
+    .eyebrow{font-size:.68rem;letter-spacing:1px;}
+    .hero h1{font-size:1.9rem;line-height:1.25;margin-bottom:14px;}
+    .hero p{font-size:.95rem;margin-bottom:26px;}
+    .hero-actions{flex-direction:column;align-items:stretch;}
+    .hero-actions .btn{text-align:center;}
+    .scroll-cue{display:none;}
+    section{padding:56px 0;}
+    .section-head{margin-bottom:32px;}
+    .section-head h2{font-size:1.55rem;}
+    .about-grid > div:first-child h2{font-size:1.55rem;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+    .skill-card{padding:18px 10px;}
+    .projects-grid{grid-template-columns:1fr;gap:20px;}
+    .contact-box{padding:36px 22px;}
+    .contact-box h2{font-size:1.55rem;}
+    .contact-actions{flex-direction:column;}
+    .contact-actions .btn{text-align:center;word-break:break-all;}
+  }
 </style>
 </head>
 <body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
 <header>
   <div class="container">
     <nav>
       <div class="logo">Brayan<span>_</span>Aponte</div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="#about">Sobre mí</a>
         <a href="#skills">Habilidades</a>
         <a href="#projects">Proyectos</a>
         <a href="#contact">Contacto</a>
       </div>
-      <a href="#contact" class="btn btn-primary">Contáctame</a>
+      <div class="nav-right">
+        <a href="#contact" class="btn btn-primary">Contáctame</a>
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
   </div>
 </header>
 
-<section class="hero">
+<div class="overlay" id="overlay"></div>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#about">Sobre mí</a>
+  <a href="#skills">Habilidades</a>
+  <a href="#projects">Proyectos</a>
+  <a href="#contact">Contacto</a>
+</div>
+
+<section class="hero" id="heroSection">
+  <div class="hero-spotlight" id="spotlight"></div>
   <div class="container">
     <div class="eyebrow">Automatización · Datos · Inteligencia Artificial</div>
-    <h1>Transformo datos y procesos en <span>soluciones empresariales</span> que ahorran tiempo</h1>
+    <h1>Transformo datos y procesos en <span class="grad">soluciones empresariales</span> que ahorran tiempo</h1>
     <p>Creo aplicaciones y herramientas que ayudan a las empresas a automatizar tareas, analizar información y tomar mejores decisiones mediante KPIs claros y procesos más eficientes. Trabajo con Inteligencia Artificial, Excel, Power BI, Looker Studio, Google Sheets, AppSheet y Google Apps Script.</p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">Ver proyectos</a>
-      <a href="https://github.com/brayan11buburo-glitch/Portafolio" class="btn btn-outline">Ver en GitHub</a>
+      <a href="https://github.com/brayan11buburo-glitch/Portafolio" class="btn btn-outline" target="_blank" rel="noopener">Ver en GitHub</a>
     </div>
+    <div class="scroll-cue"><span>Desliza para explorar</span><span class="chev"></span></div>
   </div>
 </section>
 
 <section id="about">
   <div class="container about-grid">
-    <div>
+    <div class="reveal">
       <div class="section-tag">Sobre mí</div>
-      <h2 style="font-size:2rem;font-weight:800;margin-bottom:20px;">Especialista en automatización y análisis de datos</h2>
+      <h2 style="font-size:2.1rem;font-weight:800;margin-bottom:20px;">Especialista en automatización y análisis de datos</h2>
       <p>Diseño e implemento soluciones que permiten a las empresas convertir datos dispersos en información útil: dashboards claros, procesos automatizados y modelos apoyados en inteligencia artificial que detectan patrones y aceleran la toma de decisiones.</p>
       <p>Cada proyecto en este portafolio incluye evidencia visual (capturas y video) del problema resuelto, la solución implementada y el impacto generado.</p>
     </div>
-    <div>
-      <div class="stat-box"><h3>IA + BI</h3><span>Automatización inteligente de procesos</span></div>
-      <div class="stat-box"><h3>KPIs</h3><span>Dashboards para decisiones basadas en datos</span></div>
-      <div class="stat-box"><h3>End-to-End</h3><span>Desde la captura del dato hasta el reporte final</span></div>
+    <div class="reveal" style="transition-delay:.1s">
+      <div class="stat-box"><div class="stat-icon">🤖</div><div><h3>IA + BI</h3><span>Automatización inteligente de procesos</span></div></div>
+      <div class="stat-box"><div class="stat-icon">📊</div><div><h3>KPIs</h3><span>Dashboards para decisiones basadas en datos</span></div></div>
+      <div class="stat-box"><div class="stat-icon">⚙️</div><div><h3>End-to-End</h3><span>Desde la captura del dato hasta el reporte final</span></div></div>
     </div>
   </div>
 </section>
 
 <section id="skills">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-tag">Stack</div>
       <h2>Herramientas y tecnologías</h2>
       <p>Las herramientas que uso para automatizar, analizar y comunicar datos de forma efectiva.</p>
     </div>
     <div class="skills-grid">
-      <div class="skill-card"><div class="icon">🤖</div><div class="name">Inteligencia Artificial</div><div class="desc">Automatización inteligente</div></div>
-      <div class="skill-card"><div class="icon">📊</div><div class="name">Power BI</div><div class="desc">Dashboards y KPIs</div></div>
-      <div class="skill-card"><div class="icon">📈</div><div class="name">Looker Studio</div><div class="desc">Reportes visuales</div></div>
-      <div class="skill-card"><div class="icon">📑</div><div class="name">Excel</div><div class="desc">Modelos y análisis</div></div>
-      <div class="skill-card"><div class="icon">🧾</div><div class="name">Google Sheets</div><div class="desc">Hojas de cálculo colaborativas</div></div>
-      <div class="skill-card"><div class="icon">📱</div><div class="name">AppSheet</div><div class="desc">Apps sin código</div></div>
-      <div class="skill-card"><div class="icon">⚙️</div><div class="name">Apps Script</div><div class="desc">Automatización a medida</div></div>
+      <div class="skill-card reveal"><div class="icon">🤖</div><div class="name">Inteligencia Artificial</div><div class="desc">Automatización inteligente</div></div>
+      <div class="skill-card reveal" style="transition-delay:.05s"><div class="icon">📊</div><div class="name">Power BI</div><div class="desc">Dashboards y KPIs</div></div>
+      <div class="skill-card reveal" style="transition-delay:.1s"><div class="icon">📈</div><div class="name">Looker Studio</div><div class="desc">Reportes visuales</div></div>
+      <div class="skill-card reveal" style="transition-delay:.15s"><div class="icon">📑</div><div class="name">Excel</div><div class="desc">Modelos y análisis</div></div>
+      <div class="skill-card reveal" style="transition-delay:.2s"><div class="icon">🧾</div><div class="name">Google Sheets</div><div class="desc">Hojas de cálculo colaborativas</div></div>
+      <div class="skill-card reveal" style="transition-delay:.25s"><div class="icon">📱</div><div class="name">AppSheet</div><div class="desc">Apps sin código</div></div>
+      <div class="skill-card reveal" style="transition-delay:.3s"><div class="icon">⚙️</div><div class="name">Apps Script</div><div class="desc">Automatización a medida</div></div>
     </div>
   </div>
 </section>
 
 <section id="projects">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="section-tag">Proyectos</div>
       <h2>Trabajo reciente</h2>
       <p>Cada tarjeta incluye espacio para tu captura de pantalla o video. Reemplaza la imagen/placeholder por tu material y actualiza el texto con los detalles reales del proyecto.</p>
@@ -203,7 +346,7 @@
     <div class="projects-grid">
 
       <!-- PROYECTO 1 -->
-      <div class="project-card">
+      <div class="project-card reveal tilt">
         <div class="media-slot">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
           <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto1.png)</div>
@@ -212,12 +355,12 @@
           <div class="project-tags"><span class="tag">Power BI</span><span class="tag">KPIs</span></div>
           <h3>Nombre del proyecto</h3>
           <p>Describe brevemente el problema, la solución que implementaste y el resultado (ej: "Redujo el tiempo de reporte de 3 días a 10 minutos").</p>
-          <a href="#" class="project-link">Ver detalle →</a>
+          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
         </div>
       </div>
 
       <!-- PROYECTO 2 -->
-      <div class="project-card">
+      <div class="project-card reveal tilt" style="transition-delay:.08s">
         <div class="media-slot">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
           <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto2.mp4)</div>
@@ -226,12 +369,12 @@
           <div class="project-tags"><span class="tag">Apps Script</span><span class="tag">Automatización</span></div>
           <h3>Nombre del proyecto</h3>
           <p>Describe brevemente el proceso que automatizaste, las herramientas usadas y el impacto medible en tiempo o costos.</p>
-          <a href="#" class="project-link">Ver detalle →</a>
+          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
         </div>
       </div>
 
       <!-- PROYECTO 3 -->
-      <div class="project-card">
+      <div class="project-card reveal tilt" style="transition-delay:.16s">
         <div class="media-slot">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
           <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto3.png)</div>
@@ -240,12 +383,12 @@
           <div class="project-tags"><span class="tag">Inteligencia Artificial</span><span class="tag">Datos</span></div>
           <h3>Nombre del proyecto</h3>
           <p>Describe el modelo o solución de IA implementada, qué patrones detecta y cómo apoya la toma de decisiones.</p>
-          <a href="#" class="project-link">Ver detalle →</a>
+          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
         </div>
       </div>
 
       <!-- PROYECTO 4 -->
-      <div class="project-card">
+      <div class="project-card reveal tilt" style="transition-delay:.24s">
         <div class="media-slot">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>
           <div class="hint">Coloca aquí tu captura o video<br>(ej: /assets/proyecto4.png)</div>
@@ -254,7 +397,7 @@
           <div class="project-tags"><span class="tag">AppSheet</span><span class="tag">Google Sheets</span></div>
           <h3>Nombre del proyecto</h3>
           <p>Describe la app sin código que construiste, a quién ayuda y qué operación reemplazó o mejoró.</p>
-          <a href="#" class="project-link">Ver detalle →</a>
+          <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
         </div>
       </div>
 
@@ -264,12 +407,12 @@
 
 <section id="contact" style="border-bottom:none;">
   <div class="container">
-    <div class="contact-box">
+    <div class="contact-box reveal">
       <h2>¿Trabajamos juntos?</h2>
       <p>Disponible para proyectos de automatización, análisis de datos y soluciones con inteligencia artificial.</p>
       <div class="contact-actions">
         <a href="mailto:brayan11buburo@gmail.com" class="btn btn-primary">brayan11buburo@gmail.com</a>
-        <a href="https://github.com/brayan11buburo-glitch" class="btn btn-outline">GitHub</a>
+        <a href="https://github.com/brayan11buburo-glitch" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </div>
@@ -277,9 +420,94 @@
 
 <footer>
   <div class="container">
-    © 2026 Brayan Buburo — Portafolio construido con GitHub Pages
+    © 2026 Brayan Aponte — Portafolio construido con GitHub Pages
   </div>
 </footer>
+
+<script>
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const overlay = document.getElementById('overlay');
+  function closeMenu(){
+    hamburger.classList.remove('open');
+    mobilePanel.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobilePanel.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay.addEventListener('click', closeMenu);
+  mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navA = document.querySelectorAll('.nav-links a');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s => navObserver.observe(s));
+
+  // Hero spotlight follows cursor (desktop only)
+  const hero = document.getElementById('heroSection');
+  const spotlight = document.getElementById('spotlight');
+  if (window.matchMedia('(hover:hover)').matches){
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      spotlight.style.setProperty('--mx', x + '%');
+      spotlight.style.setProperty('--my', y + '%');
+    });
+  }
+
+  // 3D tilt on project cards (desktop only)
+  if (window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2, cy = rect.height / 2;
+        const rotateX = ((y - cy) / cy) * -5;
+        const rotateY = ((x - cx) / cx) * 5;
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  // Smooth scroll offset for sticky header
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e){
+      const id = this.getAttribute('href');
+      if (id.length < 2) return;
+      const target = document.querySelector(id);
+      if (target){
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 76;
+        window.scrollTo({top:y, behavior:'smooth'});
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
