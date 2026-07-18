@@ -401,6 +401,7 @@
       <!-- PROYECTO 1 -->
       <div class="project-card reveal tilt"
            data-video=""
+           data-audio=""
            data-problema="El seguimiento de los proyectos se llevaba de forma manual y dispersa, sin una fuente de información centralizada que permitiera conocer en tiempo real el estado, los tiempos de ejecución y el valor comercial de cada proyecto."
            data-solucion="Se estructuró una base de datos en Excel que registra responsable, cliente, estado, fechas de inicio/fin y valor de cada proyecto, conectada a un dashboard interactivo en Power BI que actualiza automáticamente indicadores, gráficos y tablas dinámicas."
            data-resultado="Visión clara y centralizada de todo el portafolio de proyectos: identificación de atrasos, control del cumplimiento de cronogramas, análisis de carga de trabajo por responsable y seguimiento de proyectos vendidos y no vendidos.">
@@ -442,6 +443,7 @@
       <!-- PROYECTO 4 -->
       <div class="project-card reveal tilt" style="transition-delay:.24s"
            data-video=""
+           data-audio=""
            data-problema="El registro de los eventos de producción (tiempos de proceso, paradas de máquina, cambios de referencia y tiempos improductivos) se realizaba de forma manual, lo que dificultaba tener información actualizada y confiable."
            data-solucion="Se diseñó una aplicación móvil para que los operarios registraran cada evento en el momento en que ocurría, alimentando automáticamente una hoja de cálculo centralizada que actualiza un dashboard de producción en tiempo real."
            data-resultado="Monitoreo en tiempo real del rendimiento por máquina y línea de producción, comparación de productividad entre equipos, identificación de tiempos muertos y mejora en la toma de decisiones operativas.">
@@ -480,6 +482,7 @@
         Aquí se reproducirá el video del proyecto.<br>Agrega el archivo de video y enlázalo en el atributo <code>data-video</code> de la tarjeta.
       </div>
     </div>
+    <audio id="modalAudio" style="display:none"></audio>
     <div class="modal-body">
       <div class="modal-tags" id="modalTags"></div>
       <h3 id="modalTitle"></h3>
@@ -578,9 +581,11 @@
   const modalSolucion = document.getElementById('modalSolucion');
   const modalResultado = document.getElementById('modalResultado');
   const modalClose = document.getElementById('modalClose');
+  const modalAudio = document.getElementById('modalAudio');
 
   function openProjectModal(card){
     const videoSrc = card.getAttribute('data-video') || '';
+    const audioSrc = card.getAttribute('data-audio') || '';
     const title = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
     const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
 
@@ -592,12 +597,21 @@
 
     if (videoSrc){
       modalVideo.src = videoSrc;
+      modalVideo.muted = true;
       modalVideo.style.display = 'block';
       modalVideoPlaceholder.style.display = 'none';
+      modalVideo.play().catch(() => {});
     } else {
       modalVideo.removeAttribute('src');
       modalVideo.style.display = 'none';
       modalVideoPlaceholder.style.display = 'flex';
+    }
+
+    if (audioSrc){
+      modalAudio.src = audioSrc;
+      modalAudio.play().catch(() => {});
+    } else {
+      modalAudio.removeAttribute('src');
     }
 
     modalOverlay.classList.add('open');
@@ -609,6 +623,9 @@
     modalVideo.pause();
     modalVideo.removeAttribute('src');
     modalVideo.load();
+    modalAudio.pause();
+    modalAudio.currentTime = 0;
+    modalAudio.removeAttribute('src');
     document.body.style.overflow = '';
   }
 
