@@ -442,7 +442,7 @@
 
       <!-- PROYECTO 4 -->
       <div class="project-card reveal tilt" style="transition-delay:.24s"
-           data-video=""
+           data-video="assets/proyecto2.mp4"
            data-audio=""
            data-problema="El registro de los eventos de producción (tiempos de proceso, paradas de máquina, cambios de referencia y tiempos improductivos) se realizaba de forma manual, lo que dificultaba tener información actualizada y confiable."
            data-solucion="Se diseñó una aplicación móvil para que los operarios registraran cada evento en el momento en que ocurría, alimentando automáticamente una hoja de cálculo centralizada que actualiza un dashboard de producción en tiempo real."
@@ -452,7 +452,7 @@
         </div>
         <div class="project-body">
           <div class="project-tags"><span class="tag">AppSheet</span><span class="tag">Google Sheets</span></div>
-          <h3>Centro de Control de Producción</h3>
+          <h3>Sistema de Seguimiento de Operaciones en Líneas de Producción</h3>
           <p>Aplicación móvil conectada a un dashboard en tiempo real para capturar y analizar los eventos de producción de cada máquina y línea de trabajo.</p>
           <a href="#" class="project-link">Ver detalle <span class="arrow">→</span></a>
         </div>
@@ -597,7 +597,7 @@
 
     if (videoSrc){
       modalVideo.src = videoSrc;
-      modalVideo.muted = true;
+      modalVideo.muted = !!audioSrc;
       modalVideo.style.display = 'block';
       modalVideoPlaceholder.style.display = 'none';
       modalVideo.play().catch(() => {});
